@@ -6,18 +6,16 @@ public class EnemyMoveBehavior : MonoBehaviour
     [SerializeField] private bool chasePlayer = true;
     [SerializeField] private bool flipOnBumpWithOthers = false;
     [SerializeField] private bool chaseFaster = true;
-    [SerializeField] private bool stareAtPlayer = true;
     [SerializeField] private bool randomlyFlips = false;
     [SerializeField] private float[] randomFlipIntervals = { 5, 10 };
 
     [Header("General Attributes")]
     [SerializeField] private float patrolSpeed = 2f;
-    [SerializeField] private float flipCooldown = 0.15f;    
+    [SerializeField] private float flipCooldown = 0.15f;
 
     [Header("Optional Attributes")]
     [SerializeField] private float chaseSpeed = 4f;
-    [SerializeField] private float detectionRadius = 5f;    
-    [SerializeField] private float headResetSmooth = 360f;    
+    [SerializeField] private float detectionRadius = 5f;
 
     [Header("Dector Attachments")]
     [SerializeField] private Transform groundCheckOffset;
@@ -31,10 +29,6 @@ public class EnemyMoveBehavior : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask objectsLayer;
 
-    [Header("Self Attachments")]
-    [SerializeField] private Transform headTransform;
-    [SerializeField] private SpriteRenderer headSpriteRenderer;
-
     [Header("Dev Options")]
     [SerializeField] private bool showDetections;
 
@@ -43,7 +37,9 @@ public class EnemyMoveBehavior : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
 
-    private Transform currentTarget;    
+    private Transform currentTarget;
+
+    private GameManager gameManager;
 
     private bool facingRight;
     private bool walkAnimation;
@@ -64,7 +60,9 @@ public class EnemyMoveBehavior : MonoBehaviour
         animator = GetComponent<Animator>();
         attack = GetComponent<EnemyAttackBehavior>();
         rb = GetComponent<Rigidbody2D>();
-        stats = GetComponent<EnemyStats>();        
+        stats = GetComponent<EnemyStats>();
+
+        gameManager = FindAnyObjectByType<GameManager>();
     }
 
     private void Start()
@@ -82,7 +80,7 @@ public class EnemyMoveBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (stats.isDead)
+        if (stats.isDead || gameManager.stopAllMovementsOverride)
         {
             return;
         }
@@ -99,27 +97,7 @@ public class EnemyMoveBehavior : MonoBehaviour
 
         HandleFlipDetectionFalloff();
         GetPlayerReferenceForChasing();
-        GetMovementBehavior();        
-    }
-
-    private void LateUpdate()
-    {
-        if (stats.isDead)
-        {
-            return;
-        }
-
-        if (walkDisabledOverride)
-        {
-            return;
-        }
-
-        if (stats.isGettingAttacked)
-        {
-            return;
-        }
-
-        GetSecondaryActions();
+        GetMovementBehavior();
     }
 
     private void Update()
@@ -140,12 +118,12 @@ public class EnemyMoveBehavior : MonoBehaviour
             PatrolBehavior();
         }
 
-        SetFacing(moveDirection);        
+        SetFacing(moveDirection);
     }
 
     private void ChasingBehavior()
     {
-        float trueSpeed = 
+        float trueSpeed =
             (chaseFaster ? chaseSpeed : patrolSpeed) *
             stats.moveSpeedEffectsMultiplier;
 
@@ -154,7 +132,7 @@ public class EnemyMoveBehavior : MonoBehaviour
         int newDirection = dirX >= 0f ? 1 : -1;
 
         moveDirection = newDirection;
-        
+
         HandleMainMove(newDirection, trueSpeed);
     }
 
@@ -166,7 +144,7 @@ public class EnemyMoveBehavior : MonoBehaviour
         float trueSpeed =
             patrolSpeed *
             stats.moveSpeedEffectsMultiplier;
-        
+
         HandleMainMove(moveDirection, trueSpeed);
     }
 
@@ -178,44 +156,6 @@ public class EnemyMoveBehavior : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(targetDirection * speed, rb.linearVelocity.y);
-    }
-    #endregion
-
-    #region Secondary Actions
-    private void GetSecondaryActions()
-    {
-        if (!stareAtPlayer)
-        {
-            return;
-        }
-
-        if (isChasing)
-        {
-            LookAtTarget();
-        }
-        else
-        {
-            ResetHead();
-        }
-    }
-
-    private void LookAtTarget()
-    {
-        Vector2 direction = (Vector2)currentTarget.position - (Vector2)headTransform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        headTransform.rotation = Quaternion.Euler(0f, 0f, angle);
-
-        headSpriteRenderer.flipY = direction.x < 0f;
-    }
-
-    private void ResetHead()
-    {
-        headTransform.rotation = Quaternion.RotateTowards(
-            headTransform.rotation,
-            Quaternion.identity,
-            headResetSmooth * Time.deltaTime);
-
-        headSpriteRenderer.flipY = false;
     }
     #endregion
 
@@ -265,7 +205,7 @@ public class EnemyMoveBehavior : MonoBehaviour
 
     private void GetPlayerReferenceForChasing()
     {
-        currentTarget = chasePlayer ? DetectPlayer() : null;        
+        currentTarget = chasePlayer ? DetectPlayer() : null;
 
         isChasing = (currentTarget != null);
     }
@@ -325,10 +265,6 @@ public class EnemyMoveBehavior : MonoBehaviour
         scale.x = Mathf.Abs(scale.x) * (facingRight ? 1f : -1f);
 
         transform.localScale = scale;
-
-        Vector3 headScale = headTransform.localScale;
-        headScale.x = Mathf.Abs(headScale.x) * (facingRight ? 1f : -1f);
-        headTransform.localScale = headScale;
     }
 
     public void FaceDirection(int direction)
@@ -368,27 +304,35 @@ public class EnemyMoveBehavior : MonoBehaviour
             if (decision)
             {
                 TryFlip();
-            }            
+            }
         }
-    }    
+    }
     #endregion
 
     private void SetAnimations()
     {
-        walkAnimation = !(stats.isDead || attack.hasRangedTarget || stats.isGettingAttacked) && !walkDisabledOverride;
-        chaseAnimation = isChasing && !attack.hasRangedTarget && !walkDisabledOverride;
+        walkAnimation =
+            !(stats.isDead || attack.hasRangedTarget || stats.isGettingAttacked) &&
+            !walkDisabledOverride &&
+            !gameManager.stopAllMovementsOverride;
+
+        chaseAnimation =
+            isChasing &&
+            !attack.hasRangedTarget &&
+            !walkDisabledOverride &&
+            gameManager.stopAllMovementsOverride;
 
         animator.SetBool("Walk", walkAnimation);
         animator.SetBool("Chase", chaseAnimation);
     }
 
     private void OnDrawGizmosSelected()
-    {        
+    {
         if (showDetections)
         {
             Gizmos.DrawWireSphere(transform.position, detectionRadius);
             Gizmos.DrawWireSphere(groundCheckOffset.position, checkGroundRadius);
             Gizmos.DrawWireSphere(wallCheckOffset.position, checkGroundRadius);
-        }        
+        }
     }
 }

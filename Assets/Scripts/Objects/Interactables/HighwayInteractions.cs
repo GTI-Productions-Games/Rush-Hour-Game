@@ -4,25 +4,37 @@ using UnityEngine;
 public class HighwayInteractions : MonoBehaviour
 {
     [Header("Config")]
-    [SerializeField] private float transportationDelay = 4;
+    [SerializeField] private float transportationDelay = 4;    
+    [SerializeField] private Transform endDestination;
 
-    public void EnterHighway(bool inJeep)
+    public bool EnterHighway(bool inJeep, Transform player)
     {
         if (!inJeep)
         {
-            PopUpManager.Instance.ShowNormalCustom("I cannot cross the highway without a vehicle.");
-            return;
+            string[] cannotCrossLines = { 
+                "I need somethign to ride to cross faster...", 
+                "...or I can just walk."
+            };
+            PopUpManager.Instance.StartMonologue(cannotCrossLines);
+
+            return false;
         }
 
-        StartCoroutine(TransportingSequence());
+        StartCoroutine(TransportingSequence(player));
+
+        return true;
     }
 
-    private IEnumerator TransportingSequence()
+    private IEnumerator TransportingSequence(Transform player)
     {
-        PopUpManager.Instance.ShowLoadingCover(true);
+        PopUpManager.Instance.ShowLoadingCoverFull(true, "Transporting...");
 
-        yield return new WaitForSeconds(transportationDelay);
+        yield return new WaitForSeconds(transportationDelay * .5f);
 
-        PopUpManager.Instance.ShowLoadingCover(false);
+        player.position = endDestination.position;
+
+        yield return new WaitForSeconds(transportationDelay * 0.5f);        
+
+        PopUpManager.Instance.ShowLoadingCoverFull(false);
     }
 }

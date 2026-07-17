@@ -81,7 +81,6 @@ public class EnemyMiniBossBehavior : MonoBehaviour
             StartCoroutine(DecideForFirstAttack());
         }
 
-        Debug.Log("Getting state 3");
         if (!isDecidingForSecondAttack && (playerInOuterRange && !playerInInnerRange))
         {
             StartCoroutine(DecideForSecondAttack());
@@ -90,7 +89,6 @@ public class EnemyMiniBossBehavior : MonoBehaviour
 
     private IEnumerator DecideForFirstAttack()
     {
-        Debug.Log("Decide for first initiated.");
         isDecidingForFirstAttack = true;
 
         bool decision = (Random.Range(0f, 100f) <= firstAttackChance);
@@ -160,6 +158,7 @@ public class EnemyMiniBossBehavior : MonoBehaviour
         {
             if (!jeepSpecialBehavior.tamable)
             {
+                PopUpManager.Instance.ShowNormalCustom("Sometimes you need to try finding a jeep again.");
                 return;
             }
 

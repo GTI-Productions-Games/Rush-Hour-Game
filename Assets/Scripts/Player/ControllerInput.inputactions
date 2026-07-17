@@ -166,7 +166,7 @@
                     "id": "50798ac0-c187-4b25-91db-af2e52b44754",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -230,6 +230,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Monologue",
+            "id": "774fe9b9-90f3-487a-9fbe-b5267afa5ef6",
+            "actions": [
+                {
+                    "name": "Proceed",
+                    "type": "Button",
+                    "id": "fb84f73b-d896-4aa5-937a-304039bee8cd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "56e75a0a-e2b3-423d-9179-e52bf9b58ff6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Proceed",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -12,8 +12,9 @@ public class JeepCallInteractions : MonoBehaviour
     [SerializeField] private GameObject jeepPrefab;
     [SerializeField] private Transform jeepSpawnpoint;
     [SerializeField] private TextMeshPro jeepCooldownmUI;
+    [SerializeField] private GameObject jeepCooldownObject;
 
-    private bool callAvailable = false;
+    private bool callAvailable = true;
 
     public void CallJeep()
     {
@@ -33,7 +34,7 @@ public class JeepCallInteractions : MonoBehaviour
 
         float seconds = jeepCallCooldown;
 
-        jeepCooldownmUI.gameObject.SetActive(true);
+        jeepCooldownObject.SetActive(true);
         jeepCooldownmUI.text = $"Available again in: {seconds}";        
 
         while (seconds > 0)
@@ -47,7 +48,7 @@ public class JeepCallInteractions : MonoBehaviour
 
         yield return null;
 
-        jeepCooldownmUI.gameObject.SetActive(false);
+        jeepCooldownObject.SetActive(false);
         callAvailable = true;
     }
 }

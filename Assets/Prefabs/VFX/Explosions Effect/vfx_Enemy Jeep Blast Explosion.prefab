@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8152327076547031317}
   - component: {fileID: 4933210368870284561}
   - component: {fileID: 1161894765053395181}
+  - component: {fileID: 5337269477846909237}
+  - component: {fileID: 3281699045893628070}
   m_Layer: 8
   m_Name: vfx_Enemy Jeep Blast Explosion
   m_TagString: EnemyAttack
@@ -4863,7 +4865,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -279086143
-  m_SortingLayer: 7
+  m_SortingLayer: 10
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_RenderMode: 0
@@ -4913,6 +4915,120 @@ MonoBehaviour:
   deactivateOnly: 0
   mainObject: {fileID: 5115508052032063175}
   postDestructionEffect: {fileID: 0}
+--- !u!82 &5337269477846909237
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115508052032063175}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3281699045893628070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115508052032063175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bdac724415b1ed459f2243dcd51739c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectsAudioManager
+  explosion:
+  - {fileID: 8300000, guid: 4749e269a7a103f48872b5245a670082, type: 3}
+  - {fileID: 8300000, guid: 44347b84afbbfc143aad702d47063f21, type: 3}
+  - {fileID: 8300000, guid: 0b151aecfcdb3624fbd8aae781deb005, type: 3}
+  - {fileID: 8300000, guid: 19e01720c9963464cb6749dd231b5680, type: 3}
 --- !u!1 &7857349815841604800
 GameObject:
   m_ObjectHideFlags: 0
@@ -9782,7 +9898,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -279086143
-  m_SortingLayer: 7
+  m_SortingLayer: 10
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_RenderMode: 0

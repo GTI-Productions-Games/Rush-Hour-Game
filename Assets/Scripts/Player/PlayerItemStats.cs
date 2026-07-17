@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class PlayerItemStats : MonoBehaviour
 {
     public int coin = 0;
     public int sodaLicious = 0;
     public int sodaPop = 0;
+
+    [SerializeField] private PlayerAudioManager playerAudio;
 
     private PlayerUIManager playerUI;
 
@@ -30,7 +31,7 @@ public class PlayerItemStats : MonoBehaviour
 
         if (hasSound)
         {
-            // Play Sound
+            playerAudio.PlayCoin();
         }
     }
 
@@ -40,7 +41,7 @@ public class PlayerItemStats : MonoBehaviour
 
         if (hasSound)
         {
-            // Play Sound
+            playerAudio.PlayCoin();
         }
     }
 
@@ -48,11 +49,16 @@ public class PlayerItemStats : MonoBehaviour
     {
         float delay = hasSequence ? playerUI.collectAnimationDelay : 0;
 
+        if (hasSequence)
+        {
+            playerUI.ShowItemCollect(item);
+        }
+
         StartCoroutine(ReceiveItemSequence(item, amountToAdd, delay, hasSound));
     }
 
     private IEnumerator ReceiveItemSequence(Items item, int amountToAdd, float delay, bool hasSound = false)
-    {
+    {      
         yield return new WaitForSeconds(delay);
 
         ReceiveItemMain(item, amountToAdd, hasSound);
@@ -74,5 +80,7 @@ public class PlayerItemStats : MonoBehaviour
                 AddItem(item, amountToAdd, hasSound);
                 break;
         }
+
+        playerUI.SyncItems();
     }
 }

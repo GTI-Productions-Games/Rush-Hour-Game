@@ -10,12 +10,13 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] private float attackRangedLength;
 
     [Header("Heal Config")]
-    [SerializeField] private float healConsumeTargetDuration = 3;
+    [SerializeField] public float healConsumeTargetDuration = 2.5f;
     [SerializeField] private float healSodaAmount = 100;
 
     [Header("Player Attachments")]
     [SerializeField] private GameObject mainSprite;
     [SerializeField] private Animator animator;
+    [SerializeField] private PlayerAudioManager playerAudio;
 
     [Header("Ranged Attachments")]
     [SerializeField] private Transform attackGunTip;
@@ -24,13 +25,14 @@ public class PlayerAttackController : MonoBehaviour
     [HideInInspector] public bool isAttacking;
     [HideInInspector] public bool isHealing;
 
+    [HideInInspector] public float healConsumeFalloff;
+
     private ControllerInput input;
     private PlayerStats stats;
     private PlayerCollisions collisions;
     private PlayerItemStats itemStats;
     private PlayerArcAimController arcAimController;
-
-    private float healConsumeFalloff;
+    private GameManager gameManager;    
 
     private bool throwInitiated;
 
@@ -40,6 +42,8 @@ public class PlayerAttackController : MonoBehaviour
         collisions = GetComponent<PlayerCollisions>();
         itemStats = GetComponent<PlayerItemStats>();
         arcAimController = GetComponent<PlayerArcAimController>();
+        
+        gameManager = FindAnyObjectByType<GameManager>();
 
         InitializeInput();
     }
@@ -65,7 +69,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void PerformAttackMelee()
     {
-        if (isAttacking || stats.isPlayerDead || collisions.isHit)
+        if (isAttacking || stats.isPlayerDead || collisions.isHit || gameManager.stopAllMovementsOverride)
         {
             Debug.Log($"Can't attac. {isAttacking} | {stats.isPlayerDead} || {collisions.isHit}");
             return;
@@ -87,7 +91,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void StartAttackRanged()
     {
-        if (isAttacking || stats.isPlayerDead || collisions.isHit)
+        if (isAttacking || stats.isPlayerDead || collisions.isHit || throwInitiated || gameManager.stopAllMovementsOverride)
         {
             return;
         }
@@ -113,17 +117,20 @@ public class PlayerAttackController : MonoBehaviour
             return;
         }
 
+        Debug.Log("Release.");
+
         throwInitiated = false;
         isAttacking = false;
         animator.SetBool("Attack2", false);
 
         arcAimController.FireProjectile();
+
+        itemStats.ReceiveItem(Items.SodaPop, -1, false, false);
     }
 
     private void Update()
     {
         HandleHealingDuration();
-        arcAimController.FireProjectile();
     }
 
     private void HandleHealingDuration()
@@ -147,16 +154,35 @@ public class PlayerAttackController : MonoBehaviour
             itemStats.ReceiveItem(Items.SodaLicious, -1, false, false);
             stats.ModifyHealth(healSodaAmount);
             healConsumeFalloff = 0;
+
+            playerAudio.PlayHeal();
+
+            CancelHeal();
         }
     }
 
     private void PerformHeal()
     {
+        if (isAttacking || stats.isPlayerDead || gameManager.stopAllMovementsOverride)
+        {
+            return;
+        }
+
+        if (itemStats.sodaLicious <= 0)
+        {
+            return;
+        }
+
+        isAttacking = true;
+        animator.SetBool("Drink", true);
         isHealing = (itemStats.sodaLicious > 0);        
     }
 
     private void CancelHeal()
     {
+        isAttacking = false;
         isHealing = false;
+
+        animator.SetBool("Drink", false);
     }
 }

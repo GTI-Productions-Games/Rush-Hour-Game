@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2112593222057272546, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -201,7 +201,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4335677109464193281, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -378,7 +378,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6978575863716959282, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -469,7 +469,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 8
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3751307520252710981, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -661,7 +661,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2487461295389732322, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -785,7 +785,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2895274478923926582, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -876,7 +876,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8248650971180652127, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -968,7 +968,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 9
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6990936438806477366, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -1060,7 +1060,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3391832271737094655, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -1182,7 +1182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8280712097729544316, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -1273,7 +1273,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4009495706750131949, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -1304,6 +1304,11 @@ GameObject:
   - component: {fileID: 9009850139729901786}
   - component: {fileID: 7607336532857547993}
   - component: {fileID: 6466022303517921923}
+  - component: {fileID: 3702099918267978554}
+  - component: {fileID: -8510167471524368463}
+  - component: {fileID: 3687904157817681797}
+  - component: {fileID: 4050049188882381776}
+  - component: {fileID: 2492513569274136986}
   m_Layer: 7
   m_Name: Enemy Jeep_Robot
   m_TagString: Untagged
@@ -1327,6 +1332,7 @@ Transform:
   - {fileID: 4614151871024653414}
   - {fileID: 432949067076705701}
   - {fileID: 5447913175635521276}
+  - {fileID: 6025892459281205489}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3040280678066875845
@@ -1430,6 +1436,7 @@ MonoBehaviour:
   health: 1500
   maxHealth: 1500
   isDead: 0
+  deathDestroyDelay: 2
   moveSpeedEffectsMultiplier: 1
   isGettingAttacked: 0
 --- !u!114 &7679891138767427965
@@ -1447,7 +1454,6 @@ MonoBehaviour:
   chasePlayer: 0
   flipOnBumpWithOthers: 0
   chaseFaster: 0
-  stareAtPlayer: 0
   randomlyFlips: 1
   randomFlipIntervals:
   - 5
@@ -1456,7 +1462,6 @@ MonoBehaviour:
   flipCooldown: 0.15
   chaseSpeed: 4
   detectionRadius: 5
-  headResetSmooth: 360
   groundCheckOffset: {fileID: 9042406992974548765}
   checkGroundRadius: 0.5
   wallCheckOffset: {fileID: 8442431564386032152}
@@ -1473,8 +1478,6 @@ MonoBehaviour:
   objectsLayer:
     serializedVersion: 2
     m_Bits: 0
-  headTransform: {fileID: 2801579781713673430}
-  headSpriteRenderer: {fileID: 3880308002502490435}
   showDetections: 0
   isChasing: 0
   playerSuccessHit: 0
@@ -1493,6 +1496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCollisions
   flashEffectDuration: 0.2
   gettingAttackedDuration: 1
+  damageFlash: {fileID: 3702099918267978554}
 --- !u!114 &9009850139729901786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,6 +1547,7 @@ MonoBehaviour:
   secondAttackChance: 70
   firstAttackDuration: 2
   secondAttackDuration: 3
+  jeepSpecialBehavior: {fileID: 3687904157817681797}
 --- !u!114 &6466022303517921923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,6 +1564,163 @@ MonoBehaviour:
   shockwavePrefab: {fileID: 2050995190425205643, guid: 0497bf3f07e70aa47b9eee906837cd1a, type: 3}
   blastOriginPoint: {fileID: 6418276482765225542}
   blastPrefab: {fileID: 6846151717265561578, guid: 0fdfa0f56d6b9b24da8ccad5cf72e0c2, type: 3}
+--- !u!114 &3702099918267978554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708606370875008485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bdb86c98efcfa42a5a273ca8879bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+--- !u!114 &-8510167471524368463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708606370875008485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68875ea17aa644848919e08cdbb73657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIIndicators
+--- !u!114 &3687904157817681797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708606370875008485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec395b4e081f62b4a8392fb2dbe0ab0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyJeepSpecialBehavior
+  chanceRange:
+  - 40
+  - 70
+  tamedJeepPrefab: {fileID: 4151592517964237854, guid: 9d91fef74abfc1e4fb64738f7df2dd83, type: 3}
+  tamedJeepSpawnpoint: {fileID: 6025892459281205489}
+  tamable: 0
+--- !u!114 &4050049188882381776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708606370875008485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d231ed75d670a40b66cf6b5ca5e31f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotAudioManager
+  shootGun: {fileID: 8300000, guid: 3d7d130c94e383b48816c5dfb1f4d0f5, type: 3}
+  groundSmash: {fileID: 8300000, guid: 4749e269a7a103f48872b5245a670082, type: 3}
+  hit:
+  - {fileID: 8300000, guid: 61ff316adc3eb544e9a06b7825c6199f, type: 3}
+  - {fileID: 8300000, guid: 416b7f4bd6a774d43ba3b61f68ee2b39, type: 3}
+  - {fileID: 8300000, guid: ee1f71e3da114844bad610725d5e10a2, type: 3}
+--- !u!82 &2492513569274136986
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708606370875008485}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &9030388980508965802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,7 +1800,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1412181109
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5749406184592961353, guid: dd381b492e1e55844ac36edafd8935ba, type: 3}
@@ -1651,3 +1813,34 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &9122334788472707116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6025892459281205489}
+  m_Layer: 0
+  m_Name: Tamed Jeep Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6025892459281205489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9122334788472707116}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.27000046, y: -1.73, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1129924162546131192}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

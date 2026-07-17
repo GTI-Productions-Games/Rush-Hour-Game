@@ -7,6 +7,8 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private float sprintMultiplier = 2;
     [SerializeField] private float moveSmooth = 10;
+    [SerializeField] private float staminaConsume = 7;
+    [SerializeField] private float staminaRegen = 20;
 
     [Header("Ground Check Config")]
     [SerializeField] private Transform groundCheck;
@@ -26,6 +28,8 @@ public class PlayerMoveController : MonoBehaviour
     private PlayerStats stats;
     private PlayerCollisions collisions;
 
+    private GameManager gameManager;
+
     private float moveDirection;
     private bool isRunning;
     private bool jumpTrigger;
@@ -39,6 +43,8 @@ public class PlayerMoveController : MonoBehaviour
         stats = GetComponent<PlayerStats>();
         collisions = GetComponent<PlayerCollisions>();
         rb = GetComponent<Rigidbody2D>();
+
+        gameManager = FindAnyObjectByType<GameManager>();
 
         InitializeInput();
     }
@@ -95,11 +101,17 @@ public class PlayerMoveController : MonoBehaviour
     {
         UpdateGroundedState();
         GetMovementAnimation();
+        ConsumeStamina();
+
+        if (gameManager.stopAllMovementsOverride)
+        {
+            jumpTrigger = false;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (stats.isPlayerDead)
+        if (stats.isPlayerDead || gameManager.stopAllMovementsOverride)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             return;
@@ -118,18 +130,32 @@ public class PlayerMoveController : MonoBehaviour
     {
         float trueSpeed = 0;
 
-        if (isRunning)
-        {
-            trueSpeed = moveSpeed * sprintMultiplier;
+        if (isRunning && stats.playerStamina >= 5)
+        {            
+            trueSpeed = moveSpeed * sprintMultiplier;            
         }
         else
         {
-            trueSpeed = moveSpeed;
+            trueSpeed = moveSpeed;            
         }
 
         Vector2 targetVelocity = new Vector2(moveDirection * trueSpeed, rb.linearVelocity.y);
 
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, moveSmooth * Time.fixedDeltaTime);
+    }
+
+    private void ConsumeStamina()
+    {
+        if (isRunning)
+        {
+            stats.playerStamina -= Time.deltaTime * staminaConsume;            
+        }
+        else
+        {
+            stats.playerStamina += Time.deltaTime * staminaRegen;
+        }
+
+        stats.playerStamina = Mathf.Clamp(stats.playerStamina, 0, stats.playerMaxStamina);
     }
 
     private void HandleJump()
@@ -163,7 +189,7 @@ public class PlayerMoveController : MonoBehaviour
 
     private void GetMovementAnimation()
     {
-        bool canAnimateMovement = !(stats.isPlayerDead);
+        bool canAnimateMovement = !stats.isPlayerDead && !gameManager.stopAllMovementsOverride;
 
         if (!canAnimateMovement)
         {
@@ -173,7 +199,7 @@ public class PlayerMoveController : MonoBehaviour
         }
 
         bool isWalking = Mathf.Abs(moveDirection) > 0.01f;
-        bool isRunningNow = isWalking && isRunning;
+        bool isRunningNow = isWalking && isRunning && stats.playerStamina >= 5;
 
         animator.SetBool("Walk", isWalking);
         animator.SetBool("Run", isRunningNow);

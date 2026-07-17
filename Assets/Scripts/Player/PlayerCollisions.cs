@@ -64,23 +64,19 @@ public class PlayerCollisions : MonoBehaviour
 
     public void ReceiveDamageOvertime(float dotDamage, int dotLength)
     {
-        Debug.Log("Dot Started 1");
         if (dot != null)
         {
             StopCoroutine(dot);
             dot = null;
         }
 
-        Debug.Log("Dot Started 2");
         dot = StartCoroutine(HandleDamageOvertime(dotDamage, dotLength));
     }
 
     private IEnumerator HandleDamageOvertime(float dotDamage, int dotLength)
     {
-        Debug.Log("Dot Started 3");
         do
         {
-            Debug.Log("Dot: " + dotLength);
             stats.ModifyHealth(-dotDamage);
             ui.ShowDamageNumberIndicator(dotDamage, GameInstantiables.Instance.dotDamageIndicator);
 
@@ -92,7 +88,6 @@ public class PlayerCollisions : MonoBehaviour
 
         yield return null;
 
-        Debug.Log("Dot FInished");
         dot = null;
     }
 

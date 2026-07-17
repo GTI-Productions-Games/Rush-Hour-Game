@@ -252,7 +252,7 @@ public partial class @ControllerInput: IInputActionCollection2, IDisposable
                     ""id"": ""50798ac0-c187-4b25-91db-af2e52b44754"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -320,6 +320,34 @@ public partial class @ControllerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Monologue"",
+            ""id"": ""774fe9b9-90f3-487a-9fbe-b5267afa5ef6"",
+            ""actions"": [
+                {
+                    ""name"": ""Proceed"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb84f73b-d896-4aa5-937a-304039bee8cd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""56e75a0a-e2b3-423d-9179-e52bf9b58ff6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Proceed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -335,12 +363,16 @@ public partial class @ControllerInput: IInputActionCollection2, IDisposable
         m_Actions_Attack2 = m_Actions.FindAction("Attack2", throwIfNotFound: true);
         m_Actions_Heal = m_Actions.FindAction("Heal", throwIfNotFound: true);
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
+        // Monologue
+        m_Monologue = asset.FindActionMap("Monologue", throwIfNotFound: true);
+        m_Monologue_Proceed = m_Monologue.FindAction("Proceed", throwIfNotFound: true);
     }
 
     ~@ControllerInput()
     {
         UnityEngine.Debug.Assert(!m_Move.enabled, "This will cause a leak and performance issues, ControllerInput.Move.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Actions.enabled, "This will cause a leak and performance issues, ControllerInput.Actions.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Monologue.enabled, "This will cause a leak and performance issues, ControllerInput.Monologue.Disable() has not been called.");
     }
 
     /// <summary>
@@ -659,6 +691,102 @@ public partial class @ControllerInput: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="ActionsActions" /> instance referencing this action map.
     /// </summary>
     public ActionsActions @Actions => new ActionsActions(this);
+
+    // Monologue
+    private readonly InputActionMap m_Monologue;
+    private List<IMonologueActions> m_MonologueActionsCallbackInterfaces = new List<IMonologueActions>();
+    private readonly InputAction m_Monologue_Proceed;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Monologue".
+    /// </summary>
+    public struct MonologueActions
+    {
+        private @ControllerInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public MonologueActions(@ControllerInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Monologue/Proceed".
+        /// </summary>
+        public InputAction @Proceed => m_Wrapper.m_Monologue_Proceed;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Monologue; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="MonologueActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(MonologueActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="MonologueActions" />
+        public void AddCallbacks(IMonologueActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MonologueActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MonologueActionsCallbackInterfaces.Add(instance);
+            @Proceed.started += instance.OnProceed;
+            @Proceed.performed += instance.OnProceed;
+            @Proceed.canceled += instance.OnProceed;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="MonologueActions" />
+        private void UnregisterCallbacks(IMonologueActions instance)
+        {
+            @Proceed.started -= instance.OnProceed;
+            @Proceed.performed -= instance.OnProceed;
+            @Proceed.canceled -= instance.OnProceed;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MonologueActions.UnregisterCallbacks(IMonologueActions)" />.
+        /// </summary>
+        /// <seealso cref="MonologueActions.UnregisterCallbacks(IMonologueActions)" />
+        public void RemoveCallbacks(IMonologueActions instance)
+        {
+            if (m_Wrapper.m_MonologueActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="MonologueActions.AddCallbacks(IMonologueActions)" />
+        /// <seealso cref="MonologueActions.RemoveCallbacks(IMonologueActions)" />
+        /// <seealso cref="MonologueActions.UnregisterCallbacks(IMonologueActions)" />
+        public void SetCallbacks(IMonologueActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MonologueActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MonologueActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="MonologueActions" /> instance referencing this action map.
+    /// </summary>
+    public MonologueActions @Monologue => new MonologueActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Move" which allows adding and removing callbacks.
     /// </summary>
@@ -723,5 +851,20 @@ public partial class @ControllerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Monologue" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MonologueActions.AddCallbacks(IMonologueActions)" />
+    /// <seealso cref="MonologueActions.RemoveCallbacks(IMonologueActions)" />
+    public interface IMonologueActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Proceed" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnProceed(InputAction.CallbackContext context);
     }
 }

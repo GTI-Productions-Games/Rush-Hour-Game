@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4848347135587453517
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 885405567067158917, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276509448354784565, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: hint
+      value: 
+      objectReference: {fileID: 2611622647057820066}
+    - target: {fileID: 2276509448354784565, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: hintDetectRadius
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276509448354784565, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: seeHintDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276509448354784565, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489479172991847400, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687158090554640050, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140258294211067755, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: isTamed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140258294211067755, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: jeepRobot
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140258294211067755, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: ridePrice
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140258294211067755, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: robotRelative
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7455307852128068591, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311589195456063778, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_text
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8851158136905827923, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+      propertyPath: m_Name
+      value: Jeep Vehicle _Tamed
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 453202467489519896, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+--- !u!1 &2611622647057820066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7455307852128068591, guid: 3ac29f08950d112499aa825efe2faa05, type: 3}
+  m_PrefabInstance: {fileID: 4848347135587453517}
+  m_PrefabAsset: {fileID: 0}

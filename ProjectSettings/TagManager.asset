@@ -8,6 +8,8 @@ TagManager:
   - EnemyAttack
   - InstantDeath
   - Ground
+  - CollectibleItem
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - Enemy
   - Enemy Attack
   - Player Attack
-  - 
-  - 
+  - Collectible Item
+  - Interactable
   - 
   - 
   - 
@@ -45,13 +47,19 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: BG
     uniqueID: 935166435
     locked: 0
-  - name: Background Deco
+  - name: BG Deco 2 Inside
+    uniqueID: 3498341505
+    locked: 0
+  - name: BG Deco 2 Outside
+    uniqueID: 955170213
+    locked: 0
+  - name: BG Deco
     uniqueID: 2790081207
     locked: 0
-  - name: Background VFX
+  - name: BG VFX
     uniqueID: 3570813593
     locked: 0
   - name: Ground

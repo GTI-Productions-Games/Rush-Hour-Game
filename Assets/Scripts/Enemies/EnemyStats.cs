@@ -16,12 +16,14 @@ public class EnemyStats : MonoBehaviour
     public bool isGettingAttacked = false;
 
     private Animator animator;
+    private LootDropManager loot;
 
     private bool deathSequence = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        loot = GetComponent<LootDropManager>();
     }
 
     private void Start()
@@ -65,7 +67,13 @@ public class EnemyStats : MonoBehaviour
 
         yield return new WaitForSeconds(deathDestroyDelay);
 
+        if (loot != null)
+        {
+            yield return StartCoroutine(loot.DropCoinsSequence());
+        }
+
         Destroy(gameObject);
     }
+
     #endregion
 }

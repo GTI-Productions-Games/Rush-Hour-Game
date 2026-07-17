@@ -30,11 +30,13 @@ public class EnemyJeepSpecialBehavior : MonoBehaviour
         float decision = Random.Range(1, 100);
 
         tamable = decision <= chance;
+
+        Debug.Log($"Chance: {chance}, Decision: {decision}, Tamable: {tamable}");
     }
 
     public void SummonTamedJeep()
     {
-        
+        StartCoroutine(SummonTamedJeepSequence());   
     }
 
     private IEnumerator SummonTamedJeepSequence()

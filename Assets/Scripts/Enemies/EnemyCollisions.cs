@@ -7,6 +7,9 @@ public class EnemyCollisions : MonoBehaviour
     [SerializeField] private float flashEffectDuration = 0.2f;
     [SerializeField] private float gettingAttackedDuration = 1f;
 
+    [Header("Attachments")]
+    [SerializeField] private DamageFlash damageFlash;
+
     private Animator animator;
     private EnemyStats stats;
     private UIIndicators ui;
@@ -15,7 +18,8 @@ public class EnemyCollisions : MonoBehaviour
 
     private Coroutine dot;
 
-    private bool isFlashing;
+    private EnemyAudioManager enemyAudio;
+    private RobotAudioManager robotAudio;
 
     private float gettingAttackedFalloff;
 
@@ -25,6 +29,8 @@ public class EnemyCollisions : MonoBehaviour
         stats = GetComponent<EnemyStats>();
         rb = GetComponent<Rigidbody2D>();
         ui = GetComponent<UIIndicators>();
+
+        robotAudio = GetComponent<RobotAudioManager>();
     }
 
     private void Update()
@@ -45,15 +51,17 @@ public class EnemyCollisions : MonoBehaviour
         gettingAttackedFalloff = gettingAttackedDuration;
 
         stats.ModifyHealth(-damageAmount);
-       
+
         ui.ShowDamageNumberIndicator(damageAmount, GameInstantiables.Instance.normalDamageIndicator);
         ui.ShowHitEffect(GameInstantiables.Instance.playerHitEffect, sourcePosition);
-
         animator.SetTrigger("Damage");
         
         HandleKnockback(sourcePosition, knockbackForce, knockbackVertical);
 
-        StartCoroutine(FlashEffect(flashEffectDuration));
+        if (robotAudio != null)
+        {
+            robotAudio.PlayHit();
+        }
 
         return hit;
     }
@@ -75,12 +83,13 @@ public class EnemyCollisions : MonoBehaviour
     {
         do
         {
+            Debug.Log("Dot: " + dotLength);
             stats.ModifyHealth(-dotDamage);
             ui.ShowDamageNumberIndicator(dotDamage, GameInstantiables.Instance.dotDamageIndicator);
 
             dotLength--;
 
-            yield return null;
+            yield return new WaitForSeconds(1);
         }
         while (dotLength > 0);
 
